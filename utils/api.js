@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native'
-import { parse } from '@babel/core'
 
 const DECKS_STORAGE_KEY = 'FlashCards:decks'
 
