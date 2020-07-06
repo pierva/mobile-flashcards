@@ -7,10 +7,12 @@ const mockData = {
     title: 'React',
     cards: [
       {
+        id: "44ff728e-3f74-4bff-84f7-2ffeb56e3ef6",
         question: 'What is React?',
         answer: 'A library for managing user interfaces'
       },
       {
+        id: "8d5971a8-4b20-419d-b5a4-53022f7d8962",
         question: 'Where do you make Ajax requests in React?',
         answer: 'The componentDidMount lifecycle event'
       }
@@ -20,6 +22,7 @@ const mockData = {
     title: 'JavaScript',
     cards: [
       {
+        id: "972eb745-a6d5-4683-8e0d-b51d2b80d74b",
         question: 'What is a closure?',
         answer: 'The combination of a function and the lexical environment within which that function was declared.'
       }
