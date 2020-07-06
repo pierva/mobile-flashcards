@@ -35,9 +35,10 @@ export function removeDeck (deck) {
   }
 }
 
-export function removeCard (id) {
+export function removeCard (deck, id) {
   return {
     type: REMOVE_CARD,
+    deck,
     id
   }
 }
