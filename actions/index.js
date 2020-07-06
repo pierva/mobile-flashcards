@@ -20,17 +20,18 @@ export function addDeck (deck) {
   }
 }
 
-export function addCard (card) {
+export function addCard (deck, card) {
   return {
     type: ADD_CARD,
+    deck,
     card
   }
 }
 
-export function removeDeck (title) {
+export function removeDeck (deck) {
   return {
     type: REMOVE_DECK,
-    title
+    deck
   }
 }
 
