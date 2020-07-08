@@ -2,13 +2,13 @@ import {
   ADD_DECK,
   RECEIVE_DECKS,
   REMOVE_DECK
-} from '../actions'
+} from '../actions/actionTypes'
 
-export default function decks (state = {}, action) {
+export default function decks (state = {}, action) {  
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
-        ...state,
+        ...state.decks,
         ...action.decks
       }
     case ADD_DECK:
