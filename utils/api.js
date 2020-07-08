@@ -32,9 +32,11 @@ const mockData = {
 
 /**
  * Return all the decks in the database
+ * @param {boolean} mock Pass true to retrieve mock data
  * @returns {object}
  */
-export async function getDecks () {
+export async function getDecks (mock) {
+  if (mock) return mockData
   try {
     const results =  await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     return JSON.parse(results)
@@ -70,7 +72,7 @@ export async function getDeck(id) {
  * 
  * @returns {object}
  */
-export function saveDeckTitle(title) {
+export async function saveDeckTitle(title) {
   try {
     return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
       [title]: {
@@ -118,7 +120,7 @@ export async function addCardToDeck(title, card) {
  * 
  * @returns {object}
  */
-export function removeDeck(title) {
+export async function removeDeck(title) {
   try {
     const data = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     const parsedData = JSON.parse(data)
