@@ -4,7 +4,7 @@
  * 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
  */
 
-function generateUUID(){
+export function generateUUID(){
   var dt = new Date().getTime();
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = (dt + Math.random()*16)%16 | 0;
@@ -12,4 +12,15 @@ function generateUUID(){
       return (c=='x' ? r :(r&0x3|0x8)).toString(16);
   });
   return uuid;
+}
+
+export function formatDecks(decks) {
+  const keys = Object.keys(decks)
+  const results = keys.map((deck) => {
+    return {
+      deck,
+      cards: decks[deck].cards.length
+    }
+  })
+  return results
 }
