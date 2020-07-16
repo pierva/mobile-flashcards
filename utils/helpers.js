@@ -17,9 +17,10 @@ export function generateUUID(){
 export function formatDecks(decks) {
   const keys = Object.keys(decks)
   const results = keys.map((deck) => {
+    const cards = decks[deck].cards ? decks[deck].cards.length : 0
     return {
-      deck,
-      cards: decks[deck].cards.length
+      deck: decks[deck].title,
+      cards
     }
   })
   return results
