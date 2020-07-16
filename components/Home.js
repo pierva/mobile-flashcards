@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { 
+        View, 
+        Text, 
+        StyleSheet, 
+        Platform, 
+        TouchableOpacity,
+        FlatList} from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
 import { formatDecks } from '../utils/helpers'
+import Deck from './Deck'
 
 
 class Home extends Component {
@@ -25,9 +32,11 @@ class Home extends Component {
     const { decks } = this.props
     const results = formatDecks(decks.decks)
     return (
-      <View>
-        <Text>This is the home page</Text>
-        <Text>{JSON.stringify(results)}</Text>
+      <View style={styles.container}> 
+        <FlatList 
+          data={results} 
+          renderItem={Deck} 
+          keyExtractor={(item) => item.deck}/>
       </View>
     )
   }
