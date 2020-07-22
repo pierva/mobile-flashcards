@@ -12,10 +12,11 @@ import reducers from './reducers'
 import middleware from './middleware'
 import Constants from 'expo-constants'
 import { Ionicons } from '@expo/vector-icons'
-import { grey, blue, white, lightBlue } from './utils/colors'
+import { grey, blue, white, lightBlue, lightGrey } from './utils/colors'
 
 import Home from './components/Home'
 import AddDeck from './components/AddDeck'
+import DeckDetail from './components/DeckDetail'
 
 const store = createStore(reducers, middleware)
 
@@ -31,11 +32,11 @@ const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
 const tabBarOptions = {
-  activeTintColor: Platform.OS === 'ios' ? blue : white,
+  activeTintColor: Platform.OS === 'ios' ? white : grey,
   inactiveTingColor: lightBlue,
   style: {
     height: 80,
-    backgroundColor: Platform.OS === 'ios' ? white : blue,
+    backgroundColor: Platform.OS === 'ios' ? grey : white,
     shadowOffset: {
       width: 0,
       height: 3
@@ -56,9 +57,9 @@ function Tabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        itabBarIcon: ({ focused, color }) => {
+        tabBarIcon: ({ focused, color }) => {
           if (route.name === 'Home') {
-            return <Ionicons name='ios-home-outline' size={30} color={color} />
+            return <Ionicons name='ios-home' size={30} color={color} />
           } else if (route.name === 'Add Deck') {
             return <Ionicons name='ios-add' size={30} color={color} />
           }
@@ -79,7 +80,14 @@ export default function App() {
       <Provider store={store}>
         <CustomStatusBar backgroundColor={grey} barStyle='light-content' /> 
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={Tabs} />
+          <Stack.Screen name="Home" component={Tabs} 
+          />
+          <Stack.Screen name="DeckDetail" component={DeckDetail}
+            options={({ route }) => ({
+              title: route.params.deckName,
+              ...stackNavOptions
+            })
+          } />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

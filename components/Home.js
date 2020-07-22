@@ -35,7 +35,7 @@ class Home extends Component {
       <View style={styles.container}> 
         <FlatList 
           data={results} 
-          renderItem={Deck} 
+          renderItem={({item}) => <Deck item={item} navigation={this.props.navigation} />} 
           keyExtractor={(item) => item.deck}/>
       </View>
     )

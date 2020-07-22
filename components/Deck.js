@@ -2,9 +2,12 @@ import React, {Component} from 'react'
 import {View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { white, grey, lightBlue } from '../utils/colors'
 
-export default function Deck ({item}) {
+export default function Deck ({item, navigation}) {
     return (
-      <TouchableOpacity style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(
+        'DeckDetail',
+        { deckId: item.id, deckName: item.deck, cards: item.cards}
+      )}>
         <Text style={styles.primaryText}>{item.deck}</Text>
         <Text style={styles.secondaryText}>{item.cards} 
           {item.cards === 1 ? ' CARD' : ' CARDS'}
