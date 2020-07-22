@@ -16,11 +16,12 @@ export function generateUUID(){
 
 export function formatDecks(decks) {
   const keys = Object.keys(decks)
-  const results = keys.map((deck) => {
-    const cards = decks[deck].cards ? decks[deck].cards.length : 0
+  const results = keys.map((id) => {
+    const cards = decks[id].cards ? decks[id].cards.length : 0
     return {
-      deck: decks[deck].title,
-      cards
+      deck: decks[id].title,
+      cards,
+      id
     }
   })
   return results
