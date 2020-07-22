@@ -3,7 +3,8 @@ import { AsyncStorage } from 'react-native'
 const DECKS_STORAGE_KEY = 'FlashCards:decks'
 
 const mockData = {
-  React: {
+  '734444a6-5318-4d4b-a6c5-21895ce94ab5': {
+    id: '734444a6-5318-4d4b-a6c5-21895ce94ab5',
     title: 'React',
     cards: [
       {
@@ -18,7 +19,8 @@ const mockData = {
       }
     ]
   },
-  JavaScript: {
+  '0d64dca6-de52-498c-b36f-4df631928d9c': {
+    id: '0d64dca6-de52-498c-b36f-4df631928d9c',
     title: 'JavaScript',
     cards: [
       {
@@ -28,7 +30,8 @@ const mockData = {
       }
     ]
   },
-  ReactNative: {
+  '76e802ce-204e-4149-83ed-44e77be94307': {
+    id: '76e802ce-204e-4149-83ed-44e77be94307',
     title: 'React Native',
   }
 }
