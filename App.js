@@ -17,6 +17,7 @@ import { grey, blue, white, lightBlue, lightGrey } from './utils/colors'
 import Home from './components/Home'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard';
 
 const store = createStore(reducers, middleware)
 
@@ -85,6 +86,12 @@ export default function App() {
           <Stack.Screen name="DeckDetail" component={DeckDetail}
             options={({ route }) => ({
               title: route.params.deckName,
+              ...stackNavOptions
+            })
+          } />
+          <Stack.Screen name="AddCard" component={AddCard}
+            options={() => ({
+              title: 'Add Card',
               ...stackNavOptions
             })
           } />

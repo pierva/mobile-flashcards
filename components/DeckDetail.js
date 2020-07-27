@@ -7,18 +7,27 @@ import TextButton from './TextButton'
 
 class DeckDetail extends Component {
   render() {
+    const { cards, deckId, deckName } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.subContainer}>
         <Text style={styles.header}>
-          {this.props.cards}
-          {this.props.cards === 1 ? ' Card' : ' Cards'}
+          {cards}
+          {cards === 1 ? ' Card' : ' Cards'}
         </Text>
         </View>
         <View style={styles.subContainer}>
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: lightGreen}]} 
-            onPress={console.log('pressed')}>
+            onPress={() => this.props.navigation.navigate(
+              'AddCard',
+              {
+                cards,
+                deckId,
+                deckName
+              } 
+            )}
+            >
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity 
