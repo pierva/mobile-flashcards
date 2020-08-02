@@ -13,6 +13,12 @@ export function receiveDecks (decks) {
   }
 }
 
+/**
+ * 
+ * @param {object} deck
+ * @param {string} deck.id 
+ * @param {string} deck.title 
+ */
 export function addDeck (deck) {
   return {
     type: ADD_DECK,
@@ -20,25 +26,37 @@ export function addDeck (deck) {
   }
 }
 
-export function addCard (deck, card) {
+/**
+ * 
+ * @param {string} deckId 
+ * @param {object} card
+ * @param {string} card.question 
+ * @param {string} card.answer 
+ */
+export function addCard (deckId, card) {
   return {
     type: ADD_CARD,
-    deck,
+    deckId,
     card
   }
 }
 
-export function removeDeck (deck) {
+export function removeDeck (deckId) {
   return {
     type: REMOVE_DECK,
-    deck
+    deckId
   }
 }
 
-export function removeCard (deck, id) {
+/**
+ * 
+ * @param {string} deckId 
+ * @param {string} id card id
+ */
+export function removeCard (deckId, id) {
   return {
     type: REMOVE_CARD,
-    deck,
+    deckId,
     id
   }
 }
