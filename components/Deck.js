@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react'
+import {Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { white, grey, lightBlue } from '../utils/colors'
 
 export default function Deck ({item, navigation}) {
