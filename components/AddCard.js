@@ -3,10 +3,41 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
 import { white, lightBlue, blue, grey } from '../utils/colors'
-import { Button, Input } from 'react-native-elements'
+import { Input } from 'react-native-elements'
+import { addCardToDeck } from '../utils/api' 
+import { addCard } from '../actions'
 
 
 class AddCard extends Component {
+  state = {
+    question: undefined,
+    answer: undefined
+  }
+
+  /**
+   * 
+   * @param {string} key either 'question' or 'answer'
+   * @param {string} value 
+   */
+  onChange = (key, value) => {
+    this.setState(() => ({
+      [key]: value
+    }))
+  }
+
+  onSubmit = (deckId) => {
+    const card = this.state
+    
+    // Update Redux
+    this.props.dispatch(addCard(deckId, card))
+    
+    // Route to home
+    this.props.navigation.goBack()
+
+    // Update DB
+    addCardToDeck(deckId, card)
+  }
+
   render() {
     const {deckId, cards, deckName } = this.props.route.params;
     return (
@@ -26,7 +57,7 @@ class AddCard extends Component {
             containerStyle={styles.inputContainer}
             placeholder='Question'
             errorStyle={{ color: 'red' }}
-            // errorMessage='Question is required'    
+            onChangeText={text => this.onChange('question', text)}    
           />
 
           <Input
@@ -34,11 +65,11 @@ class AddCard extends Component {
             containerStyle={styles.inputContainer}
             placeholder='Answer'
             errorStyle={{ color: 'red' }}
-            // errorMessage='Answer is required'
+            onChangeText={text => this.onChange('answer', text)}
           />
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: blue}]} 
-            onPress={console.log('pressed')}>
+            onPress={() => this.onSubmit(deckId)}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
