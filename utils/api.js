@@ -97,24 +97,24 @@ export async function saveDeckTitle(title) {
 
 /**
  * 
- * @param {string} title 
+ * @param {string} deckId 
  * @param {object} card
  * @param {string} card.question
  * @param {string} card.answer 
  * 
  * @returns {object}
  */
-export async function addCardToDeck(title, card) {
+export async function addCardToDeck(deckId, card) {
   try {
     const data = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     const parsedData = JSON.parse(data)
-    parsedData[title].questions.push(card) 
+    parsedData[deckId].questions.push(card) 
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(parsedData))
     return parsedData
   } catch (error) {
     console.error(error)
     return {
-      error: `Unable to add card to deck: ${title}`,
+      error: `Unable to add card to deck: ${parsedData[deckId].title}`,
       details: error
     }
   }
