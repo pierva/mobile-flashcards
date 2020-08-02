@@ -17,10 +17,10 @@ export default function decks (state = {}, action) {
         ...action.deck
       }
     case REMOVE_DECK:
-      const { [action.name]: value, ...newState} = state
+      const { [action.deckId]: value, ...newState} = state
       return {
         newState,
-        ...action.deck
+        ...action.deckId
       }
     default: 
       return state
