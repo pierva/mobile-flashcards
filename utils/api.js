@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native'
+import { generateUUID } from './helpers'
 
 const DECKS_STORAGE_KEY = 'FlashCards:decks'
 
@@ -74,18 +75,20 @@ export async function getDeck(id) {
 
 /**
  * 
- * @param {string} title 
- * 
+ * @param {string} deckName 
  * @returns {object}
  */
-export async function saveDeckTitle(title) {
+export async function saveDeck(title) {
   try {
-    return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-      [title]: {
+    const id = generateUUID()
+    await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+      [id]: {
+        id,
         title,
-        questions: []
+        cards: []
       }
     }))
+    return id
   } catch (error) {
     console.error(error)
     return {
