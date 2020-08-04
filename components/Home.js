@@ -3,8 +3,6 @@ import {
         View, 
         Text, 
         StyleSheet, 
-        Platform, 
-        TouchableOpacity,
         FlatList} from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
@@ -21,7 +19,7 @@ class Home extends Component {
   componentDidMount() {
     const { dispatch } = this.props   
     
-    getDecks(true)
+    getDecks()
       .then((decks) => dispatch(receiveDecks(decks))) 
       .then(() => this.setState(() => ({
         ready: true
@@ -31,12 +29,17 @@ class Home extends Component {
   render() {
     const { decks } = this.props
     const results = formatDecks(decks.decks)
+    console.log(results);
     return (
       <View style={styles.container}> 
+      {results.length === 0 ?
+        <Text style={{textAlign: 'center'}}>No decks available</Text> 
+        :
         <FlatList 
-          data={results} 
-          renderItem={({item}) => <Deck item={item} navigation={this.props.navigation} />} 
-          keyExtractor={(item) => item.deck}/>
+        data={results} 
+        renderItem={({item}) => <Deck item={item} navigation={this.props.navigation} />} 
+        keyExtractor={(item) => item.deck}/>
+      }
       </View>
     )
   }
