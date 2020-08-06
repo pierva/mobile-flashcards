@@ -41,7 +41,7 @@ export function addCard (deckId, card) {
   }
 }
 
-export function removeDeck (deckId) {
+export function removeDeckAction (deckId) {
   return {
     type: REMOVE_DECK,
     deckId
