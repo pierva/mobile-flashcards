@@ -19,10 +19,10 @@ export default function decks (state = {}, action) {
         }
       }
     case REMOVE_DECK:
-      const { [action.deckId]: value, ...newState} = state
+      const newState = state
+      delete newState[action.deckId]
       return {
-        newState,
-        ...action.deckId
+        ...newState
       }
     default: 
       return state
