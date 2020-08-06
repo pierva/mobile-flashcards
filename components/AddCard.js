@@ -116,14 +116,4 @@ const styles = StyleSheet.create({
   } 
 })
 
-function mapStateToProps(state, {route}) {
-}
-
-function mapDispatchToProps(dispatch, { route, navigation }) {
-  //Need to insert remove and goBack methods 
-  return {
-
-  }
-}
-
 export default connect()(AddCard)
