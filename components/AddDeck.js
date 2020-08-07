@@ -32,7 +32,7 @@ class AddDeck extends Component {
       title: deckTitle
     }))
 
-    // Route to home
+    // Route back
     this.props.navigation.goBack()
   }
 

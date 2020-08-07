@@ -129,18 +129,18 @@ export async function addCardToDeck(deckId, card) {
  * 
  * @returns {object}
  */
-export async function removeDeck(title) {
+export async function removeDeck(deckId) {
   try {
     const data = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     const parsedData = JSON.parse(data)
-    parsedData[title] = undefined
-    delete data[title]
+    parsedData[deckId] = undefined
+    delete data[deckId]
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(parsedData))
     return parsedData
   } catch (error) {
     console.error(error)
     return {
-      error: `Unable to delete deck: ${title}`,
+      error: `Unable to delete deck.`,
       details: error
     }
   }

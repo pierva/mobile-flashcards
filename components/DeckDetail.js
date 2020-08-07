@@ -3,18 +3,35 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { white, lightBlue, danger, lightGreen, blue } from '../utils/colors'
 
+import { removeDeck } from '../utils/api'
+import { removeDeckAction } from '../actions'
+
+
 import TextButton from './TextButton'
 
 class DeckDetail extends Component {
+
+  deleteDeck = (deckId) => {
+    
+    // Update Redux
+    this.props.dispatch(removeDeckAction(deckId))
+
+    // Update DB
+    removeDeck(deckId)
+
+    // Route back home
+    this.props.navigation.goBack()
+  }
+
   render() {
     const { cards, deckId, deckName } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.subContainer}>
-        <Text style={styles.header}>
-          {cards}
-          {cards === 1 ? ' Card' : ' Cards'}
-        </Text>
+          <Text style={styles.header}>
+            {cards}
+            {cards === 1 ? ' Card' : ' Cards'}
+          </Text>
         </View>
         <View style={styles.subContainer}>
           <TouchableOpacity 
@@ -35,8 +52,10 @@ class DeckDetail extends Component {
             onPress={console.log('pressed')}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
-          <TextButton style={{color: danger, padding: 5}}>
-            Delete DeckDetail
+          <TextButton style={{color: danger, padding: 10}}
+            onPress={() => this.deleteDeck(deckId)}
+          >
+            Delete Deck {deckName}
           </TextButton>
         </View>
       </View>
