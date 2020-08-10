@@ -6,6 +6,7 @@ import { white, lightBlue, blue, grey } from '../utils/colors'
 import { Input } from 'react-native-elements'
 import { addCardToDeck } from '../utils/api' 
 import { addCard } from '../actions'
+import { generateUUID } from '../utils/helpers'
 
 
 class AddCard extends Component {
@@ -25,8 +26,9 @@ class AddCard extends Component {
     }))
   }
 
-  onSubmit = (deckId) => {
+  onSubmit = async (deckId) => {
     const card = this.state
+    card.id = generateUUID()
     
     // Update Redux
     this.props.dispatch(addCard(deckId, card))

@@ -111,7 +111,7 @@ export async function addCardToDeck(deckId, card) {
   try {
     const data = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     const parsedData = JSON.parse(data)
-    parsedData[deckId].questions.push(card) 
+    parsedData[deckId].cards.push(card) 
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(parsedData))
     return parsedData
   } catch (error) {

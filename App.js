@@ -17,7 +17,7 @@ import { grey, blue, white, lightBlue, lightGrey } from './utils/colors'
 import Home from './components/Home'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
-import AddCard from './components/AddCard';
+import AddCard from './components/AddCard'
 
 const store = createStore(reducers, middleware)
 
