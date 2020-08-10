@@ -1,7 +1,9 @@
 import {
   ADD_DECK,
   RECEIVE_DECKS,
-  REMOVE_DECK
+  REMOVE_DECK,
+  ADD_CARD,
+  REMOVE_CARD
 } from '../actions/actionTypes'
 
 export default function decks (state = {}, action) {  
@@ -15,7 +17,8 @@ export default function decks (state = {}, action) {
       return {
         ...state,
         [action.deck.id]: {
-          ...action.deck
+          ...action.deck,
+          cards: []
         }
       }
     case REMOVE_DECK:
@@ -23,6 +26,22 @@ export default function decks (state = {}, action) {
       delete newState[action.deckId]
       return {
         ...newState
+      }
+    case ADD_CARD:
+      return {
+        ...state,
+        [action.deckId]: {
+          ...state[action.deckId],
+         cards: [...state[action.deckId].cards, action.card]
+        }
+      }
+    case REMOVE_CARD:
+      return {
+        ...state,
+        [action.deckId]: {
+          ...[action.deckId],
+          cards: state.decks[action.deckId].cards.filter(card => card.id !== action.id)
+        }
       }
     default: 
       return state
