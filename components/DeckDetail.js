@@ -49,7 +49,7 @@ class DeckDetail extends Component {
           </TouchableOpacity>
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: blue}]} 
-            onPress={console.log('pressed')}>
+            onPress={() => console.log('not implemented yet')}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
           <TextButton style={{color: danger, padding: 10}}
@@ -98,19 +98,12 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state, {route}) {
-  const { deckId, deckName, cards } = route.params
+  const { deckId, deckName } = route.params
   return {
     deckId,
     deck: state.decks[deckId],
     deckName,
-    cards
-  }
-}
-
-function mapDispatchToProps(dispatch, { route, navigation }) {
-  //Need to insert remove and goBack methods 
-  return {
-
+    cards: state.decks[deckId].cards.length
   }
 }
 

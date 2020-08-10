@@ -6,7 +6,7 @@ export default function Deck ({item, navigation}) {
     return (
       <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(
         'DeckDetail',
-        { deckId: item.id, deckName: item.deck, cards: item.cards}
+        { deckId: item.id, deckName: item.deck }
       )}>
         <Text style={styles.primaryText}>{item.deck}</Text>
         <Text style={styles.secondaryText}>{item.cards} 
