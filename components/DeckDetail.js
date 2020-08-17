@@ -49,7 +49,14 @@ class DeckDetail extends Component {
           </TouchableOpacity>
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: blue}]} 
-            onPress={() => console.log('not implemented yet')}>
+            onPress={() => this.props.navigation.navigate(
+              'QuizView',
+              {
+                deckId,
+                deckName
+              } 
+            )}
+            >
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
           <TextButton style={{color: danger, padding: 10}}

@@ -18,6 +18,7 @@ import Home from './components/Home'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
+import QuizView from './components/QuizView'
 
 const store = createStore(reducers, middleware)
 
@@ -85,13 +86,19 @@ export default function App() {
           />
           <Stack.Screen name="DeckDetail" component={DeckDetail}
             options={({ route }) => ({
-              title: route.params.deckName,
+              title: '',
               ...stackNavOptions
             })
           } />
           <Stack.Screen name="AddCard" component={AddCard}
             options={() => ({
               title: 'Add Card',
+              ...stackNavOptions
+            })
+          } />
+          <Stack.Screen name="QuizView" component={QuizView}
+            options={() => ({
+              title: 'Quiz',
               ...stackNavOptions
             })
           } />

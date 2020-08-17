@@ -29,7 +29,6 @@ class Home extends Component {
   render() {
     const { decks } = this.props
     const results = formatDecks(decks.decks)
-    console.log(results);
     return (
       <View style={styles.container}> 
       {results.length === 0 ?
