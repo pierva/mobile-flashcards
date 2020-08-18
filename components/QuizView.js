@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
 import Question from './Question'
+import { blue } from '../utils/colors'
 
 class QuizView extends Component {
   state = {
@@ -32,16 +33,18 @@ class QuizView extends Component {
       )
     }
     return (
-      <View style={{flex: 1}}>
-        <View style={styles.container}>
-          <Text>
+      <View style={styles.container}>
+        <View style={styles.topRow}>
+          <Text style={styles.topRowText}>
             Card {cardNumber+1} of {cards.length}
           </Text>
-          <Text>
+          <Text style={styles.topRowText}>
             {deckName}
           </Text>
         </View>
-        <Question card={cards[cardNumber]}/>
+        <View style={{flex: 1}}>
+          <Question card={cards[cardNumber]}/>
+        </View>
       </View>
     )
   }
@@ -56,10 +59,18 @@ function mapStateToProps({decks}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
+    height: '100%'
+  },
+  topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 5
+    alignItems: 'center',
+    margin: 5,
+    height: 35
+  },
+  topRowText: {
+    fontSize: 20,
+    color: blue
   }
 })
 
