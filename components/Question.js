@@ -55,10 +55,10 @@ export default function Question({ card }) {
 
   return (
     <View style={styles.container}>
-
-      <TouchableOpacity onPress={() => flipCard()}>
-        <Ionicons name="ios-undo" size={30} style={styles.flipButton}/>
+      <TouchableOpacity onPress={() => flipCard()} style={styles.flipButton}>
+        <Ionicons name="ios-undo" size={30} style={styles.flipButtonIcon}/>
       </TouchableOpacity>
+      
       {/* Front of the card */}
       <Animated.View style={[styles.flipCard, styles.flipCardFront, frontAnimatedStyle]}>
         <Text>
@@ -85,18 +85,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    margin: 10,
+    marginTop: 30,
     position: "relative"
   },
   flipButton: {
-    position: "absolute",
-    bottom: -10,
-    left: '35%',
-    zIndex: 999,
-    backgroundColor: danger,
+    backgroundColor: blue,
     borderRadius: 20,
+    width: 40,
+    height: 40,
+    position: "absolute",
+    top: -20,
+    right: 15,
+    zIndex: 1,
     height: 40,
     width: 40,
+    textAlign: "center",
+    lineHeight: 40
+  },
+  flipButtonIcon: {
+    color: white,
     textAlign: "center",
     lineHeight: 40
   },
@@ -126,8 +133,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 3.84,
-    zIndex: 1,
-    marginBottom: 10
+    zIndex: -1,
+    marginBottom: 10,
+    position: 'relative'
   },
   flipCardFront: {
     backgroundColor: lightGrey,
