@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   Text,
   StyleSheet,
@@ -7,9 +7,9 @@ import {
   Animated
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { white, blue, lightGreen, danger, lightBlue, beige, lightGrey } from '../utils/colors'
+import { white, blue, lightGreen, danger, lightGrey } from '../utils/colors'
 
-export default function Question({ card }) {
+export default function Question({ card, submitAnswer }) {
 
   let animatedValue = new Animated.Value(0);
   let val = 0;
@@ -61,20 +61,32 @@ export default function Question({ card }) {
       
       {/* Front of the card */}
       <Animated.View style={[styles.flipCard, styles.flipCardFront, frontAnimatedStyle]}>
-        <Text>
-          {card.question}
+        <Text style={[{color: white}, styles.cardHeader]}>
+          ¿¿Question??
+        </Text>
+        <Text style={styles.cardText}>
+          {card.question}?
         </Text>
       </Animated.View>
 
       {/* Back of the card */}
       <Animated.View style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle]}>
-        <Text>{card.answer}</Text>
+      <Text style={[{color: lightGrey}, styles.cardHeader]}>
+          Answer
+        </Text>
+        <Text style={styles.cardText}>{card.answer}</Text>
       </Animated.View>
 
-      <TouchableOpacity style={[styles.button, { backgroundColor: lightGreen }]}>
+      <TouchableOpacity 
+        style={[styles.button, { backgroundColor: lightGreen }]}
+        onPress={() => submitAnswer(true)}
+        >
         <Text style={styles.buttonText}>Correct</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, { backgroundColor: danger }]}>
+      <TouchableOpacity 
+        style={[styles.button, { backgroundColor: danger }]}
+        onPress={() => submitAnswer(false)}
+        >
         <Text style={styles.buttonText}>Incorrect</Text>
       </TouchableOpacity>
     </View>
@@ -143,6 +155,22 @@ const styles = StyleSheet.create({
   flipCardBack: {
     backgroundColor: white,
     position: 'absolute',
+  },
+  cardText: {
+    color: blue,
+    fontSize: 22,
+    alignSelf: 'center',
+    flex: 1,
+    marginTop: -30
+  },
+  cardHeader: {
+    flex: 1,
+    fontSize: 30,
+  },
+  cardAnswer: {
+    color: blue,
+    fontSize: 20
   }
+
 })
 
