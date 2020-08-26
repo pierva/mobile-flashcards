@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons'
 class QuizView extends Component {
   state = {
     cardNumber: 0,
-    currentCardId: undefined,
     correctAnswers: 0,
     endGame: false,
     totCards: this.props.decks[this.props.route.params.deckId].cards.length
@@ -51,7 +50,8 @@ class QuizView extends Component {
   restartGame = () => {
     this.setState(() => ({
       cardNumber: 0,
-      endGame: false
+      endGame: false,
+      correctAnswers: 0
     }))
   }
 
