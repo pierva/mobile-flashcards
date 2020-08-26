@@ -12,7 +12,7 @@ import reducers from './reducers'
 import middleware from './middleware'
 import Constants from 'expo-constants'
 import { Ionicons } from '@expo/vector-icons'
-import { grey, blue, white, lightBlue, lightGrey } from './utils/colors'
+import { grey, blue, white, lightBlue } from './utils/colors'
 
 import Home from './components/Home'
 import AddDeck from './components/AddDeck'
