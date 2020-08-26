@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import Question from './Question'
 import QuizResult from './QuizResult'
-import { blue } from '../utils/colors'
+import { blue, white, grey } from '../utils/colors'
+import { Ionicons } from '@expo/vector-icons'
 
 class QuizView extends Component {
   state = {
@@ -16,7 +17,6 @@ class QuizView extends Component {
 
   updateCardNumber  = () => {
     const {totCards, cardNumber } = this.state 
-    console.log('UPDATING THE CARD NUMBER');
     if(totCards === cardNumber+1){
       return this.setState(() => {
         return {
@@ -44,6 +44,17 @@ class QuizView extends Component {
     return this.updateCardNumber()
   }
 
+  backToHome = () => {
+    return this.props.navigation.popToTop('Home')
+  }
+
+  restartGame = () => {
+    this.setState(() => ({
+      cardNumber: 0,
+      endGame: false
+    }))
+  }
+
   render() {
     const {deckName, deckId} = this.props.route.params
     const cards = this.props.decks[deckId].cards
@@ -58,10 +69,26 @@ class QuizView extends Component {
         </View>
       )
     }
-    if(endGame) return <QuizResult 
+    if(endGame) return (
+    <View style={{flex: 1}}>
+      <QuizResult 
       correctAnswers={correctAnswers}
       totCards={totCards}
       />
+      <View style={styles.navBar}>
+        <TouchableOpacity onPress={() => this.backToHome()} style={styles.navBarText}>
+          <Ionicons name='ios-home' size={30} 
+            color={Platform.OS === 'ios' ? white : grey} />
+          <Text style={styles.navBarText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.restartGame()} style={styles.navBarText}>
+          <Ionicons name='ios-play' size={30} 
+            color={Platform.OS === 'ios' ? white : grey} />
+            <Text style={styles.navBarText}>Start Over</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+)
     return (
       <View style={styles.container}>
         <View style={styles.topRow}>
@@ -105,6 +132,26 @@ const styles = StyleSheet.create({
   },
   warningText: {
     textAlign: 'center',
+  },
+  navBar: {
+    height: 80,
+    backgroundColor: Platform.OS === 'ios' ? grey : white,
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 6,
+    shadowOpacity: 1,
+    fontSize: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  navBarText: {
+    color: Platform.OS === 'ios' ? white : grey,
+    textAlign: 'center',
+    alignItems: 'center',
+    fontSize: 10
   }
 })
 
