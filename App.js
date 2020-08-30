@@ -20,6 +20,8 @@ import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
 import QuizView from './components/QuizView'
 
+import { setLocalNotification } from './utils/helpers'
+
 const store = createStore(reducers, middleware)
 
 function CustomStatusBar({ backgroundColor, ...props }) {
@@ -76,7 +78,13 @@ function Tabs() {
   )
 }
 
-export default function App() {
+export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
+  render() {
   return (
     <NavigationContainer>
       <Provider store={store}>
@@ -105,5 +113,5 @@ export default function App() {
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
-  );
+  )}
 }

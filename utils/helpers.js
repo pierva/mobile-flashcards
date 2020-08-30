@@ -1,3 +1,9 @@
+import { AsyncStorage } from 'react-native'
+import * as Permissions from 'expo-permissions'
+import { Notifications } from 'expo'
+
+const NOTIFICATION_KEY = 'UdacityFitness:notifications'
+
 /**
  * @name generateUID
  * This function will generate a UUID with the follow structure:
@@ -14,6 +20,10 @@ export function generateUUID(){
   return uuid;
 }
 
+/**
+ * 
+ * @param {object} decks 
+ */
 export function formatDecks(decks) {
   const keys = Object.keys(decks)
   const results = keys.map((id) => {
@@ -25,4 +35,55 @@ export function formatDecks(decks) {
     }
   })
   return results
+}
+
+export function clearLocalNotification () {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY)
+    .then(Notifications.cancelAllScheduledNotificationsAsync())
+}
+
+export function createNotification() {
+  return {
+    title: 'Log your stats!',
+    body: "👋 don't forget to study today!",
+    ios: {
+      sound: true
+    },
+    android: {
+      sound: true,
+      priority: 'high',
+      sticky: false,
+      vibrate: true
+    }
+  }
+}
+
+export function setLocalNotification () {
+  AsyncStorage.getItem(NOTIFICATION_KEY)
+    .then(JSON.parse)
+    .then((data) => {
+      if (data === null) {
+        Permissions.askAsync(Permissions.NOTIFICATIONS)
+          .then(({ status }) => {
+            if (status === 'granted') {
+              Notifications.cancelAllScheduledNotificationsAsync()
+
+              let tomorrow = new Date()
+              tomorrow.setDate(tomorrow.getDate() + 1)
+              tomorrow.setHours(18)
+              tomorrow.setMinutes(0)
+
+              Notifications.scheduleLocalNotificationAsync(
+                createNotification(),
+                {
+                  time: tomorrow,
+                  repeat: 'day'
+                }
+              )
+
+              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+            }
+          })
+      }
+    })
 }
