@@ -110,7 +110,7 @@ function mapStateToProps(state, {route}) {
     deckId,
     deck: state.decks[deckId],
     deckName,
-    cards: state.decks[deckId].cards.length
+    cards: state.decks[deckId] ? state.decks[deckId].cards.length : null
   }
 }
 
