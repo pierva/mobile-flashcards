@@ -19,8 +19,8 @@ class DeckDetail extends Component {
     // Update DB
     removeDeck(deckId)
 
-    // Route back home
-    this.props.navigation.goBack()
+    // Route to home
+    this.props.navigation.popToTop('Home')
   }
 
   render() {

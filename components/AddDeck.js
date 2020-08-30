@@ -32,8 +32,9 @@ class AddDeck extends Component {
       title: deckTitle
     }))
 
-    // Route back
-    this.props.navigation.goBack()
+    // Route to deck detail
+    this.props.navigation.navigate('DeckDetail',
+      { deckId: id, deckName: deckTitle })
   }
 
   render() {
