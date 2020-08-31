@@ -6,12 +6,22 @@ import QuizResult from './QuizResult'
 import { blue, white, grey } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+
 class QuizView extends Component {
   state = {
     cardNumber: 0,
     correctAnswers: 0,
     endGame: false,
     totCards: this.props.decks[this.props.route.params.deckId].cards.length
+  }
+
+  componentDidMount() {
+    if(this.state.totCards > 0) {
+      // Clear local notification
+      clearLocalNotification()
+      .then(setLocalNotification)
+    }
   }
 
   updateCardNumber  = () => {
