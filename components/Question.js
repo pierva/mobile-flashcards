@@ -10,8 +10,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { white, blue, lightGreen, danger, lightGrey } from '../utils/colors'
 
 export default function Question({ card, submitAnswer }) {
-
-  let animatedValue = new Animated.Value(0);
+  const animatedValue = new Animated.Value(0)
   let val = 0;
 
   animatedValue.addListener(({ value }) => {
